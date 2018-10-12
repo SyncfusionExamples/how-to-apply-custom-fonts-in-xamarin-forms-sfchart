@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:local="clr-namespace:CustomFont"
+             x:Class="CustomFont.MainPage" Padding="0,20,0,0">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CustomFont">
+                <On Platform="iOS" Value="Lobster-Regular" />
+                <On Platform="Android" Value="Lobster-Regular.ttf#Lobster-Regular" />
+                <On Platform="UWP" Value="Assets/Fonts/Lobster-Regular.ttf#Lobster" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <chart:SfChart x:Name="chart" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+        <chart:SfChart.BindingContext>
+            <local:ViewModel/>
+        </chart:SfChart.BindingContext>
+
+        <chart:SfChart.Title>
+            <chart:ChartTitle Text="Olympic Medal Counts - RIO"/>
+        </chart:SfChart.Title>
+
+        <chart:SfChart.PrimaryAxis>
+            <chart:CategoryAxis>
+                <chart:CategoryAxis.Title>
+                    <chart:ChartAxisTitle Text="Country"/>
+                </chart:CategoryAxis.Title>
+            </chart:CategoryAxis>
+        </chart:SfChart.PrimaryAxis>
+
+        <chart:SfChart.SecondaryAxis>
+            <chart:NumericalAxis>
+                <chart:NumericalAxis.Title>
+                    <chart:ChartAxisTitle Text="Medals"/>
+                </chart:NumericalAxis.Title>
+            </chart:NumericalAxis>
+        </chart:SfChart.SecondaryAxis>
+
+        <chart:SfChart.Legend>
+            <chart:ChartLegend>
+                <chart:ChartLegend.LabelStyle>
+                    <chart:ChartLegendLabelStyle FontFamily="{StaticResource CustomFont}" TextColor="Blue" FontSize="18"/>
+                </chart:ChartLegend.LabelStyle>
+            </chart:ChartLegend>
+        </chart:SfChart.Legend>
+
+        <chart:SfChart.Series>
+            <chart:ColumnSeries ItemsSource="{Binding GoldData}" Label="Gold" XBindingPath="XValue" YBindingPath="YValue">
+                <chart:ColumnSeries.DataMarker>
+                    <chart:ChartDataMarker/>
+                </chart:ColumnSeries.DataMarker>
+            </chart:ColumnSeries>
+
+            <chart:ColumnSeries ItemsSource="{Binding SilverData}" Label="Silver" XBindingPath="XValue" YBindingPath="YValue">
+                <chart:ColumnSeries.DataMarker>
+                    <chart:ChartDataMarker/>
+                </chart:ColumnSeries.DataMarker>
+            </chart:ColumnSeries>
+			
+			<chart:ColumnSeries ItemsSource="{Binding BronzeData}" Label="Bronze" XBindingPath="XValue" YBindingPath="YValue">
+                <chart:ColumnSeries.DataMarker>
+                    <chart:ChartDataMarker/>
+                </chart:ColumnSeries.DataMarker>
+            </chart:ColumnSeries>
+			
+        </chart:SfChart.Series>
+    </chart:SfChart>
+
+</ContentPage>
